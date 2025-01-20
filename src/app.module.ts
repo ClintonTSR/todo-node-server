@@ -25,6 +25,7 @@ import { Todo } from './todo/entities/todo.entity';
                 password: configService.get('DB_PASSWORD'),
                 database: configService.get('DB_DATABASE'),
                 synchronize: true, //configService.get('NODE_ENV') === 'development',
+                entities: [Todo],
 
             }),
         }),],
