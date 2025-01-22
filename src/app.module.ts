@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TodoModule } from './todo/todo.module';
 import { DB_CONNECTION_NAME } from './todo/constants/db.contants';
 import { Todo } from './todo/entities/todo.entity';
+import { UserModule } from './user/user.module';
 
 @Module({
  imports: [
@@ -28,7 +29,8 @@ import { Todo } from './todo/entities/todo.entity';
                 entities: [Todo],
 
             }),
-        }),],
+        }),
+        UserModule,],
   controllers: [AppController],
   providers: [AppService],
 })
