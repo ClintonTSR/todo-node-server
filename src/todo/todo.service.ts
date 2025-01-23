@@ -24,8 +24,8 @@ export class TodoService {
     return this.todoRepo.findOneBy({ id });
   }
 
-  update(id: string, updateTodoDto: UpdateTodoDto) {
-    return this.todoRepo.update(id, updateTodoDto);
+  update(id: string, dto: UpdateTodoDto) {
+    return this.todoRepo.update(id, dto);
   }
 
   remove(id: string) {

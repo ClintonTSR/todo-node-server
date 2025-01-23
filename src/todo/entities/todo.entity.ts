@@ -19,4 +19,7 @@ export class Todo {
 
     @UpdateDateColumn({ name: 'updated_at', type: 'timestamp', precision: 3 })
     updatedAt: Date;
+
+    @Column({ name: 'user_id', type: 'uuid' })
+    userId: string;
 }
