@@ -2,14 +2,16 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Put, InternalServerE
 import { TodoService } from './todo.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
+import { toTodoDto } from './dto/todo.transformer';
 
 @Controller('todo')
 export class TodoController {
   constructor(private readonly todoService: TodoService) { }
 
   @Post()
-  create(@Body() createTodoDto: CreateTodoDto) {
-    return this.todoService.create(createTodoDto);
+  async create(@Body() createTodoDto: CreateTodoDto) {
+    const todo = await this.todoService.create(createTodoDto);
+    return toTodoDto(todo);
   }
 
   @Get()
@@ -27,7 +29,8 @@ export class TodoController {
     const updatedResult = await this.todoService.update(id, updateTodoDto);
 
     if (updatedResult.affected === 1) {
-      return this.todoService.findOne(id);
+      const todo = await this.todoService.findOne(id);
+      return toTodoDto(todo);
     }
 
     throw new InternalServerErrorException({
