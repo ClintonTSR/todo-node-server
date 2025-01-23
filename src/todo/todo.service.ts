@@ -25,7 +25,11 @@ export class TodoService {
   }
 
   update(id: string, dto: UpdateTodoDto) {
-    return this.todoRepo.update(id, dto);
+    return this.todoRepo.update(id, {
+      name: dto.name,
+      description: dto.description,
+      dueDate: dto.dueDate,
+    });
   }
 
   remove(id: string) {
