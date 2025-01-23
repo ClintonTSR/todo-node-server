@@ -7,9 +7,6 @@ export class CreateTodoDto {
     @IsString()
     description: string;
 
-    @IsString()
-    userId: string;
-
     @IsDateString()
     @IsOptional()
     dueDate: Date;

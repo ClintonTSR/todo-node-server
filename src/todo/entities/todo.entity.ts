@@ -11,7 +11,7 @@ export class Todo {
     @Column({ name: 'description', type: 'text'})
     description: string;
 
-    @Column({ name: 'due_date', type: 'timestamp'})
+    @Column({ name: 'due_date', type: 'timestamp', nullable: true })
     dueDate: Date;
 
     @CreateDateColumn({ name: 'created_at', type: 'timestamp', precision: 3 })
@@ -20,6 +20,6 @@ export class Todo {
     @UpdateDateColumn({ name: 'updated_at', type: 'timestamp', precision: 3 })
     updatedAt: Date;
 
-    @Column({ name: 'user_id', type: 'uuid' })
+    @Column({ name: 'user_id', type: 'uuid', nullable: true })
     userId: string;
 }
