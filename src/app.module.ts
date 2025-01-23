@@ -30,7 +30,9 @@ import { UserModule } from './user/user.module';
 
             }),
         }),
-        UserModule,],
+        UserModule,
+        TodoModule,
+    ],
   controllers: [AppController],
   providers: [AppService],
 })
