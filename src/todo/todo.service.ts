@@ -5,6 +5,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DB_CONNECTION_NAME } from './constants/db.contants';
 import { Repository } from "typeorm";
 import { Todo } from './entities/todo.entity';
+import { buildPaginator, Cursor, PagingQuery, PagingResult, PaginationOptions } from 'typeorm-cursor-pagination';
+import { DEFAULT_PAGING_ORDER, DEFAULT_PAGING_SIZE } from './constants/pagination.constant';
+import { PagingQueryDto } from 'src/common/paginator.dto';
 
 @Injectable()
 export class TodoService {
@@ -16,8 +19,26 @@ export class TodoService {
     return this.todoRepo.save(dto);
   }
 
-  findAll() {
-    return this.todoRepo.find();
+  async findAll(query: PagingQueryDto<Todo>): Promise<PagingResult<Todo>> {
+    const qb = this.todoRepo.createQueryBuilder('todo');
+
+    const paginator = buildPaginator({
+      entity: Todo,
+      paginationKeys: [query.orderBy ?? 'createdAt'],
+      query: {
+        limit: query.limit ?? DEFAULT_PAGING_SIZE,
+        order: query.order ?? DEFAULT_PAGING_ORDER,
+        beforeCursor: query.beforeCursor,
+        afterCursor: query.afterCursor,
+      },
+    });
+
+    const { data, cursor } = await paginator.paginate(qb);
+
+    return {
+      data,
+      cursor,
+    };
   }
 
   findOne(id: string) {

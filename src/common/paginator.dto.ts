@@ -2,7 +2,7 @@ import { Transform } from "class-transformer";
 import { IsIn, IsNumber, IsOptional } from "class-validator";
 import { PagingQuery } from "typeorm-cursor-pagination";
 
-export class PagingQueryDto implements PagingQuery {
+export class PagingQueryDto<T> implements PagingQuery {
     @IsOptional()
     afterCursor?: string;
     
@@ -19,4 +19,6 @@ export class PagingQueryDto implements PagingQuery {
     @IsIn(['ASC', 'DESC'])
     order?: 'ASC' | 'DESC';
     
+    @IsOptional()
+    orderBy?: keyof T;
 }

@@ -1,8 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put, InternalServerErrorException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put, InternalServerErrorException, Query } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { toTodoDto } from './dto/todo.transformer';
+import { Cursor, PagingQuery } from 'typeorm-cursor-pagination';
+import { PagingQueryDto } from 'src/common/paginator.dto';
+import { Todo } from './entities/todo.entity';
 
 @Controller('todo')
 export class TodoController {
@@ -15,8 +18,8 @@ export class TodoController {
   }
 
   @Get()
-  findAll() {
-    return this.todoService.findAll();
+  findAll(@Query() query: PagingQueryDto<Todo>) {
+    return this.todoService.findAll(query);
   }
 
   @Get(':id')
