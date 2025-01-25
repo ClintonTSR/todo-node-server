@@ -7,6 +7,7 @@ import { TodoModule } from './todo/todo.module';
 import { DB_CONNECTION_NAME } from './todo/constants/db.contants';
 import { Todo } from './todo/entities/todo.entity';
 import { UserModule } from './user/user.module';
+import { LoggerModule } from 'nestjs-pino';
 
 @Module({
  imports: [
@@ -32,6 +33,7 @@ import { UserModule } from './user/user.module';
         }),
         UserModule,
         TodoModule,
+        LoggerModule.forRoot(),
     ],
   controllers: [AppController],
   providers: [AppService],
