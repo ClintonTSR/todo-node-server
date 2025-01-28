@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 
 export class TodoDto {
   id: string;
-  title: string;
+  name: string;
   description: string;
   dueDate: Date;
   status: 'Not urgent' | 'Due soon' | 'Overdue';
@@ -15,7 +15,7 @@ export const toTodoDto = (data: Todo): TodoDto => {
 
   return {
     id: data.id,
-    title: data.name,
+    name: data.name,
     description: data.description,
     dueDate: data.dueDate,
     status: daysTilDue <= 0 ? 'Overdue' : daysTilDue < 7 ? 'Due soon' : 'Not urgent'

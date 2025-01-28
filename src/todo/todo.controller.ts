@@ -18,8 +18,12 @@ export class TodoController {
   }
 
   @Get()
-  findAll(@Query() query: PagingQueryDto<Todo>) {
-    return this.todoService.findAll(query);
+  async findAll(@Query() query: PagingQueryDto<Todo>) {
+    const { data, cursor } = await this.todoService.findAll(query);
+    return {
+      data: data.map(toTodoDto),
+      cursor
+    }
   }
 
   @Get(':id')
