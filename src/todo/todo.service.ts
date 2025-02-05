@@ -7,7 +7,7 @@ import { Repository } from "typeorm";
 import { Todo } from './entities/todo.entity';
 import { buildPaginator, Cursor, PagingQuery, PagingResult, PaginationOptions } from 'typeorm-cursor-pagination';
 import { DEFAULT_PAGING_ORDER, DEFAULT_PAGING_SIZE } from './constants/pagination.constant';
-import { PagingQueryDto } from 'src/common/paginator.dto';
+import { PagingQueryDto } from '../common/paginator.dto';
 
 @Injectable()
 export class TodoService {

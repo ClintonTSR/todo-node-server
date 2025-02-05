@@ -3,9 +3,9 @@ import { TodoService } from './todo.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { toTodoDto } from './dto/todo.transformer';
-import { Cursor, PagingQuery } from 'typeorm-cursor-pagination';
-import { PagingQueryDto } from 'src/common/paginator.dto';
+
 import { Todo } from './entities/todo.entity';
+import { PagingQueryDto } from '../common/paginator.dto';
 
 @Controller('todo')
 export class TodoController {
