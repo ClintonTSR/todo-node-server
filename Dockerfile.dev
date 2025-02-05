@@ -1,4 +1,4 @@
-ARG NODE_VERSION=18.15-alpine3.17
+ARG NODE_VERSION=20-alpine3.17
 
 FROM node:$NODE_VERSION as build
 
