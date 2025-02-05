@@ -1,4 +1,4 @@
-import { Todo } from "../entities/todo.entity";
+import { Todo } from '../entities/todo.entity';
 import dayjs from 'dayjs';
 
 export class TodoDto {
@@ -10,14 +10,19 @@ export class TodoDto {
 }
 
 export const toTodoDto = (data: Todo): TodoDto => {
-  const dueDate = dayjs().add(7, 'day')
-  const daysTilDue = dueDate.diff(data.dueDate ?? dayjs(), 'day')
+  const dueDate = data.dueDate ? dayjs(data.dueDate) : null;
+  const daysTilDue = dueDate?.diff(dayjs(), 'day') ?? null;
 
   return {
     id: data.id,
     name: data.name,
     description: data.description,
     dueDate: data.dueDate,
-    status: daysTilDue <= 0 ? 'Overdue' : daysTilDue < 7 ? 'Due soon' : 'Not urgent'
-  }
+    status:
+      !dueDate || daysTilDue > 7
+        ? 'Not urgent'
+        : daysTilDue > 0
+          ? 'Due soon'
+          : 'Overdue',
+  };
 };
